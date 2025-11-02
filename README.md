@@ -41,10 +41,6 @@ ExpenseTracker/
 ├── Views/ → Razor views (UI)
 └── wwwroot/ → Static files (CSS, JS, images)
 
-yaml
-Copy code
-
----
 
 ## 📈 Dashboard
 
@@ -53,9 +49,6 @@ Displays:
 - Top 3 expense categories  
 - Visual breakdown chart using Chart.js  
 
-```csharp
-var labelsJson = JsonSerializer.Serialize(Model.ChartLabels);
-var dataJson = JsonSerializer.Serialize(Model.ChartData);
 🧾 Reports
 Users can generate:
 
@@ -63,51 +56,8 @@ PDF Reports using QuestPDF
 
 Excel Reports using ClosedXML
 
-Both reports include:
-
-User Name
-
-Period (Month/Year)
-
-Category
-
-Note
-
-Total Expense
-
 🔐 Authentication
-Implemented using JWT tokens and refresh cookies:
-
-csharp
-Copy code
-Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
-Ensures secure session handling and token renewal.
-
-🛠️ How to Run Locally
-Clone the repository:
-
-bash
-Copy code
-git clone https://github.com/yourusername/ExpenseTracker.git
-Open the solution in Visual Studio 2022.
-
-Update the connection string in appsettings.json to your local SQL Server.
-
-Run database migrations (if applicable):
-
-bash
-Copy code
-Update-Database
-Run the project (F5) — the app will open in your browser.
-
-🧩 Future Enhancements
-Add income tracking and balance summary
-
-Support for multiple currencies
-
-Role-based access (Admin / User)
-
-AI-based expense categorization
+Implemented using JWT tokens and refresh cookies
 
 👨‍💻 Author
 Tarek Hesham
