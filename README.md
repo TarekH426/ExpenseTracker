@@ -1,0 +1,116 @@
+# 💰 Expense Tracker
+
+A **web-based expense management system** built with **ASP.NET Core MVC**, designed to help users track their daily spending, view reports, and export data to PDF or Excel.  
+The project demonstrates solid backend development skills, data handling, and dynamic reporting features.
+
+---
+
+## 🚀 Features
+
+- 🔐 **User Authentication** (Login, JWT Refresh Token)
+- 💸 **Add / Edit / Delete Expenses**
+- 📊 **Dashboard** with monthly statistics and top categories (Chart.js)
+- 📅 **Filter by Month and Year**
+- 📥 **Export Reports** to PDF & Excel (QuestPDF + ClosedXML)
+- 📁 **Category Management**
+- 🌐 **Responsive UI** using Bootstrap
+
+---
+
+## 🧩 Tech Stack
+
+**Backend:** ASP.NET Core MVC (.NET 9)  
+**Frontend:** HTML, CSS, Bootstrap, Chart.js  
+**Database:** Microsoft SQL Server  
+**Libraries:**  
+- `ClosedXML` – for Excel export  
+- `QuestPDF` – for PDF generation  
+- `Entity Framework Core` – for data access  
+- `JWT` – for authentication
+
+---
+
+## 🧠 Architecture Overview
+
+ExpenseTracker/
+│
+├── Controllers/ → Handle user requests (e.g., ExpenseController, ReportController)
+├── Models/ → ViewModels and DTOs for data transfer
+├── DAL/ → Data Access Layer (EF models, DbContext)
+├── BLL/ → Business Logic Layer (services and interfaces)
+├── Views/ → Razor views (UI)
+└── wwwroot/ → Static files (CSS, JS, images)
+
+yaml
+Copy code
+
+---
+
+## 📈 Dashboard
+
+Displays:
+- Total monthly expenses  
+- Top 3 expense categories  
+- Visual breakdown chart using Chart.js  
+
+```csharp
+var labelsJson = JsonSerializer.Serialize(Model.ChartLabels);
+var dataJson = JsonSerializer.Serialize(Model.ChartData);
+🧾 Reports
+Users can generate:
+
+PDF Reports using QuestPDF
+
+Excel Reports using ClosedXML
+
+Both reports include:
+
+User Name
+
+Period (Month/Year)
+
+Category
+
+Note
+
+Total Expense
+
+🔐 Authentication
+Implemented using JWT tokens and refresh cookies:
+
+csharp
+Copy code
+Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
+Ensures secure session handling and token renewal.
+
+🛠️ How to Run Locally
+Clone the repository:
+
+bash
+Copy code
+git clone https://github.com/yourusername/ExpenseTracker.git
+Open the solution in Visual Studio 2022.
+
+Update the connection string in appsettings.json to your local SQL Server.
+
+Run database migrations (if applicable):
+
+bash
+Copy code
+Update-Database
+Run the project (F5) — the app will open in your browser.
+
+🧩 Future Enhancements
+Add income tracking and balance summary
+
+Support for multiple currencies
+
+Role-based access (Admin / User)
+
+AI-based expense categorization
+
+👨‍💻 Author
+Tarek Hesham
+Backend Developer (.NET)
+📧 thesham426@gmail.com
+🌐 www.linkedin.com/in/tarekhesham
