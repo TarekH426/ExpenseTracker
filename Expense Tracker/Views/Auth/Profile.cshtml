@@ -1,0 +1,46 @@
+@model ExpenseTracker.DAL.Models.AuthModels.AppUser
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container mt-4">
+    <h2>User Profile</h2>
+    
+    <div class="card shadow">
+   
+   
+            <div class="row mb-3">
+                <div class="col-sm-3"><strong>Username:</strong></div>
+                <div class="col-sm-9">@Model.UserName</div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-sm-3"><strong>Email:</strong></div>
+                <div class="col-sm-9">@Model.Email</div>
+            </div>
+            
+          @*   <div class="row mb-3">
+                <div class="col-sm-3"><strong>First Name:</strong></div>
+                <div class="col-sm-9">@(Model.FirstName ?? "Not set")</div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-sm-3"><strong>Last Name:</strong></div>
+                <div class="col-sm-9">@(Model.LastName ?? "Not set")</div>
+            </div> *@
+            
+            <div class="row mb-3">
+                <div class="col-sm-3"><strong>Account Created:</strong></div>
+                <div class="col-sm-9">@Model.CreatedAt.ToString("MMM dd, yyyy HH:mm") UTC</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <form asp-action="LogoutPost" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+</div>
+
+

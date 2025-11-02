@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Expense Tracker";
+}
+
+<section class="et-container">
+    <section class="et-features">
+        @if (User.Identity!.IsAuthenticated && ViewData["UserName"] != null)
+        {
+            <div class="alert alert-success mb-4" role="alert">
+                <h4 class="alert-heading">Welcome back, @ViewData["UserName"]! 👋</h4>
+                <p class="mb-0">Great to see you again. Manage your expenses and track your spending from here.</p>
+            </div>
+        }
+        <div class="et-header">
+            <img class="et-icon-img" src="~/icons/expense.png" asp-append-version="true" alt="Expense Tracker" />
+            <h1>Expense Tracker</h1>
+        </div>
+        <h2 class="et-features-title">How Expense Tracker works</h2>
+        <div class="et-feature-grid">
+            <div class="et-feature-card">
+                <div class="et-feature-icon" aria-hidden="true">🧾</div>
+                <div class="et-feature-heading">1. Add Expense</div>
+                <p class="et-feature-text">Quickly capture spending from web or mobile and organize by category.</p>
+            </div>
+            <div class="et-feature-card">
+                <div class="et-feature-icon" aria-hidden="true">📊</div>
+                <div class="et-feature-heading">2. Track on Dashboard</div>
+                <p class="et-feature-text">See totals, trends, and charts so you always know where money goes.</p>
+            </div>
+            <div class="et-feature-card">
+                <div class="et-feature-icon" aria-hidden="true">📄</div>
+                <div class="et-feature-heading">3. Export Reports</div>
+                <p class="et-feature-text">Download detailed reports as PDF or Excel for sharing or filing.</p>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            @if (User.Identity!.IsAuthenticated)
+            {
+                <a class="btn btn-primary px-4" asp-controller="Expense" asp-action="Create">Add Expense</a>
+            }
+            else
+            {
+                <a class="btn btn-primary px-4" asp-controller="Auth" asp-action="Register">Get Started</a>
+            }
+        </div>
+    </section>
+</section>
+
+@section Scripts {
+    <script>
+        document.body.classList.add('et-home-bg');
+    </script>
+}

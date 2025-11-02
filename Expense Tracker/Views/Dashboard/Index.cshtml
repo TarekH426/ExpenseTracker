@@ -1,0 +1,99 @@
+@using System.Text.Json
+@model Expense_Tracker.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+    var labelsJson = JsonSerializer.Serialize(Model.ChartLabels);
+    var dataJson = JsonSerializer.Serialize(Model.ChartData);
+}
+
+<div class="container mt-4">
+    @if (ViewData["UserName"] != null)
+    {
+        <div class="alert alert-info mb-4" role="alert">
+            <h4 class="alert-heading">Welcome, @ViewData["UserName"]! 👋</h4>
+            <p class="mb-0">Here's your expense overview for @Model.SelectedMonth/@Model.SelectedYear</p>
+        </div>
+    }
+    <h2>Dashboard</h2>
+
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Monthly Expenses</h5>
+                    <p class="card-text display-6">@Model.MonthlyTotal.ToString("C")</p>
+                    <p class="text-muted">@Model.SelectedMonth/@Model.SelectedYear</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Top 3 Categories</h5>
+                    <div style="max-width: 320px; margin: 0 auto;">
+                        <canvas id="topCategoriesChart" width="280" height="280"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Breakdown</h5>
+                    <ul class="list-group">
+                        @foreach (var item in Model.TopCategories)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>@item.Key</span>
+                                <span>@item.Value.ToString("C")</span>
+                            </li>
+                        }
+                        @if (!Model.TopCategories.Any())
+                        {
+                            <li class="list-group-item">No data available for this month.</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    (function() {
+        var labels = @Html.Raw(labelsJson);
+        var data = @Html.Raw(dataJson);
+
+        var ctx = document.getElementById('topCategoriesChart');
+        if (ctx && labels.length > 0) {
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ['#4e79a7', '#f28e2b', '#e15759'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    aspectRatio: 1,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    layout: { padding: 10 }
+                }
+            });
+        }
+    })();
+ </script>
+
+

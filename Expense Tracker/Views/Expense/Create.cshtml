@@ -1,0 +1,108 @@
+@model ExpenseTracker.DAL.Models.ExpenseViewModel
+
+@{
+    ViewData["Title"] = "Create Expense";
+}
+
+<div class="container mt-4">
+    <h2>Create Expense</h2>
+
+    <form asp-action="Create" method="post" class="mt-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="Amount" class="form-label"></label>
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Date" class="form-label"></label>
+            <input asp-for="Date" class="form-control" type="date" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 et-cat-select-wrap position-relative">
+            <label asp-for="CategoryId" class="form-label"></label>
+            <div class="et-cat-icon-bg" aria-hidden="true"></div>
+            <select asp-for="CategoryId" class="form-select">
+                <option value="" disabled selected>-- Select a category --</option>
+                @if (Model.Categories != null)
+                {
+                    foreach (var c in Model.Categories)
+                    {
+                        <option value="@c.CategoryId" data-icon="@c.Icon">@c.Title</option>
+                    }
+                }
+                <option value="-1" data-icon="">Other</option>
+            </select>
+            <div class="form-text">Choose the category that best matches this expense.</div>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3" id="otherCategoryGroup" style="display:none;">
+            <label class="form-label" for="NewCategoryTitle">Other category</label>
+            <input type="text" id="NewCategoryTitle" name="NewCategoryTitle" class="form-control" />
+            <div class="form-text">Type a custom category name.</div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Note" class="form-label"></label>
+            <input asp-for="Note" class="form-control" />
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            const selectEl = document.querySelector('select[name="CategoryId"]');
+            const iconBg = document.querySelector('.et-cat-icon-bg');
+            const otherGroup = document.getElementById('otherCategoryGroup');
+            const otherInput = document.getElementById('NewCategoryTitle');
+
+            function toggleOther() {
+                if (!selectEl) return;
+                const isOther = String(selectEl.value) === "-1";
+                otherGroup.style.display = isOther ? '' : 'none';
+                otherInput.toggleAttribute('required', isOther);
+                if (!isOther) {
+                    otherInput.value = '';
+                }
+            }
+
+            function updateIconBg() {
+                if (!selectEl || !iconBg) return;
+                const selected = selectEl.options[selectEl.selectedIndex];
+                if (!selected) return;
+                const icon = selected.getAttribute('data-icon') || '';
+                iconBg.style.backgroundImage = '';
+                iconBg.textContent = '';
+                if (!icon) { return; }
+                if (icon.includes('/') || icon.startsWith('http')) {
+                    iconBg.style.backgroundImage = `url('${icon}')`;
+                } else {
+                    // Treat as emoji or short text icon
+                    iconBg.textContent = icon;
+                }
+            }
+
+            if (selectEl) {
+                selectEl.addEventListener('change', toggleOther);
+                selectEl.addEventListener('change', updateIconBg);
+                // Initialize on load in case of validation errors
+                toggleOther();
+                updateIconBg();
+            }
+        })();
+    </script>
+}
+
+

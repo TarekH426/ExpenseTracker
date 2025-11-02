@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Expense_Tracker</title>
+    <link rel="icon" type="image/png" href="~/icons/expense.png" asp-append-version="true" />
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Expense_Tracker.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="et-nav navbar navbar-expand-md mb-3">
+            <div class="container">
+                <a class="navbar-brand et-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img class="et-brand-icon-img" src="~/icons/expense.png" asp-append-version="true" alt="Expense Tracker" />
+                    <span>Expense Tracker</span>
+                </a>
+                <button class="navbar-toggler et-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#etNavbar" aria-controls="etNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="etNavbar">
+                    <ul class="et-nav-menu ms-auto list-unstyled d-flex align-items-center mb-0">
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link et-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link et-link" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard
+                                  
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link et-link" asp-area="" asp-controller="Expense" asp-action="Index">Expenses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link et-link" asp-area="" asp-controller="Report" asp-action="Index">Reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link et-link" asp-area="" asp-controller="Auth" asp-action="Profile">Profile</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link et-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link et-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            @if (User.Identity!.IsAuthenticated)
+                            {
+                                <form asp-controller="Auth" asp-action="LogoutPost" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a class="btn btn-outline-primary btn-sm me-2" asp-controller="Auth" asp-action="Login">Login</a>
+                                <a class="btn btn-primary btn-sm" asp-controller="Auth" asp-action="Register">Register</a>
+                            }
+                        </li>
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <button id="themeToggle" class="btn btn-outline-secondary btn-sm" type="button" aria-label="Toggle theme">🌙</button>
+                            </li>
+                        }
+                        <span class="et-nav-indicator" aria-hidden="true"></span>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,336 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 0;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* --- Expense Tracker Theme Variables --- */
+:root {
+  --et-blue: #2563eb; /* primary blue */
+  --et-blue-600: #1d4ed8;
+  --et-blue-50: #eff6ff;
+  --et-text: #0f172a;
+  --et-muted: #64748b;
+  --et-card: #ffffff;
+  --et-border: #e2e8f0;
+  --et-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+  --et-blue: #3b82f6;
+  --et-blue-600: #60a5fa;
+  --et-blue-50: #0b1220;
+  --et-text: #e5e7eb;
+  --et-muted: #9ca3af;
+  --et-card: #111827;
+  --et-border: #374151;
+  --et-bg: #0b1020;
+
+  /* Bootstrap variable overrides for dark mode */
+  --bs-body-bg: #0b1020;
+  --bs-body-color: #e5e7eb;
+  --bs-border-color: #374151;
+  --bs-card-bg: #111827;
+  --bs-card-border-color: #374151;
+  --bs-list-group-bg: #111827;
+  --bs-list-group-color: #e5e7eb;
+  --bs-list-group-border-color: #374151;
+  --bs-dropdown-bg: #111827;
+  --bs-dropdown-color: #e5e7eb;
+
+  /* Ensure text stays readable across common components */
+  --bs-table-bg: #0f172a;
+  --bs-table-color: #e5e7eb;
+}
+
+/* Explicit text overrides for dark mode where Bootstrap sets dark text */
+[data-theme="dark"] .table,
+[data-theme="dark"] .table thead th,
+[data-theme="dark"] .table tbody td,
+[data-theme="dark"] .table tfoot td,
+[data-theme="dark"] .table tfoot th {
+  color: #e5e7eb !important;
+}
+
+.et-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.et-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.et-header h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--et-text);
+}
+
+.et-icon-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: var(--et-blue-50);
+  border: 1px solid var(--et-border);
+}
+
+.et-section-title {
+  font-size: 1rem;
+  color: var(--et-muted);
+  margin: 0 0 0.75rem 0;
+}
+
+.et-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.et-card {
+  background: var(--et-card);
+  border: 1px solid var(--et-border);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+}
+
+.et-card-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.et-card-amount {
+  color: var(--et-blue-600);
+  font-weight: 700;
+}
+
+.et-expenses {
+  border: 1px solid var(--et-border);
+  border-radius: 10px;
+  background: var(--et-card);
+  padding: 0.5rem 0.75rem;
+}
+
+.et-expense-date {
+  font-size: 0.9rem;
+  color: var(--et-muted);
+  margin: 0.5rem 0;
+}
+
+.et-expense-row {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px dashed var(--et-border);
+  padding: 0.6rem 0.25rem;
+}
+
+.et-expense-amount {
+  color: var(--et-blue);
+  font-weight: 600;
+}
+
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+
+/* Navbar styles */
+.et-nav {
+  background: transparent; /* overlay on background image */
+  border-bottom: 1px solid transparent;
+}
+.et-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--et-text);
+}
+.et-brand-icon-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: var(--et-blue-50);
+  border: 1px solid var(--et-border);
+}
+.et-link { color: var(--et-text); }
+.et-link:hover { color: var(--et-blue-600); }
+
+/* Fancy nav menu with animated underline */
+.et-nav-menu {
+  gap: 1.75rem;
+  padding: 0.5rem 1rem;
+  background: var(--et-card);
+  border: 1px solid var(--et-border);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  position: relative;
+}
+.et-nav-menu > li > a {
+  display: inline-block;
+  padding: 0.6rem 0.25rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.et-nav-indicator {
+  position: absolute;
+  height: 3px;
+  background: #22d3ee; /* cyan accent */
+  left: 0;
+  bottom: 6px;
+  width: 0;
+  border-radius: 3px;
+  transition: transform 200ms ease, width 200ms ease, opacity 200ms ease;
+  opacity: 0;
+}
+
+/* Improve tap targets on mobile */
+@media (max-width: 576px) {
+  .et-nav-menu { gap: 1rem; padding: 0.4rem 0.75rem; }
+  .et-nav-menu > li > a { padding: 0.55rem 0.2rem; }
+}
+
+/* Global background/text for theme */
+body {
+  background: var(--et-bg);
+  color: var(--et-text);
+}
+
+/* Responsiveness tweaks */
+@media (max-width: 576px) {
+  .et-header h1 { font-size: 1.5rem; }
+  .et-brand-icon-img { width: 28px; height: 28px; }
+  .et-expense-row { font-size: 0.95rem; }
+}
+
+/* ---- Home: Features section ---- */
+.et-features { 
+  border: 1px solid var(--et-border);
+  background: var(--et-card);
+  border-radius: 14px;
+  padding: 1.25rem; 
+  margin-bottom: 1.5rem;
+}
+.et-features-title {
+  font-weight: 800;
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem 0;
+}
+.et-feature-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.et-feature-tab {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--et-border);
+  background: var(--et-bg);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--et-muted);
+}
+.et-feature-tab.is-active {
+  background: var(--et-blue-50);
+  color: var(--et-text);
+}
+.et-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.et-feature-card {
+  background: rgba(2, 6, 23, 0.02); /* subtle contrast in light */
+  border: 1px solid var(--et-border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+[data-theme="dark"] .et-feature-card {
+  background: rgba(255, 255, 255, 0.02);
+}
+.et-feature-icon {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: var(--et-blue-50);
+  border: 1px solid var(--et-border);
+  margin-bottom: 0.5rem;
+}
+.et-feature-heading { font-weight: 700; margin-bottom: 0.25rem; }
+.et-feature-text { margin: 0; color: var(--et-muted); }
+
+@media (max-width: 768px) {
+  .et-feature-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Home page background ---- */
+.et-home-bg {
+  background-image: url('/Images/top-view-desk-with-financial-instruments.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* ---- Category icon preview behind select ---- */
+.et-cat-select-wrap { }
+.et-cat-select-wrap .et-cat-icon-bg {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  pointer-events: none;
+  opacity: 0.15;
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: center;
+  font-size: 28px; /* for emoji */
+}
+
+/* ---- Small category badge used in listings ---- */
+.et-cat-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: inline-grid;
+  place-items: center;
+  background: var(--et-blue-50);
+  border: 1px solid var(--et-border);
+  font-size: 18px; /* for emoji */
+}
+.et-cat-badge-img {
+  background-size: cover;
+  background-position: center;
+}
